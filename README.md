@@ -25,6 +25,7 @@ hexo-theme-yilia-plus
 1. 手机端头像添加主页跳转链接
 2. 集成不蒜子访问量统计功能
 3. 网易云音乐插件
+3. `aplayer`音乐插件 （支持多平台,多首歌播放）
 4. 页面点击小红心效果
 5. 增加了多个SubNav导航图标展示
 6. 添加GitHub Ribbons(Fork me)
@@ -33,6 +34,7 @@ hexo-theme-yilia-plus
 9. 添加百度站长平台主动推送
 10. 集成 gitment 评论 ➡️ [https://github.com/JoeyBling/yilia-plus-demo](https://github.com/JoeyBling/yilia-plus-demo)
 11. [集成码云评论](https://gitee.com/zhousiwei/giteement) ➡️ [https://gitee.com/zhousiwei/yilia-plus-demo](https://gitee.com/zhousiwei/yilia-plus-demo)
+11. 集成`gitalk` 评论系统
 12. 添加网站成立年份
 13. 页面加载进度条
 14. 添加苹果图标
@@ -94,6 +96,7 @@ hexo-theme-yilia-plus
 - [基于码云的评论系统](https://gitee.com/zhousiwei/giteement)
 - DISQUS
 - 搜狐畅言
+- `gitalk` 评论系统  (推荐)
 
 ## 三、开始使用
 
@@ -130,26 +133,27 @@ menu:
 
 # subNav-子导航
 subNav:
-  github: "#"
-  gitee: "#" # 码云
-  jianshu: "#" #简书
-  cnblog: "#"
-  #blog: "#"
-  #csdn: "#"
-  #rss: "#"
-  #zhihu: "#"
-  #qq: "img/2434387555.jpg"
-  #weixin: "img/weixin_.png"
-  #weibo: "#"
-  #douban: "#"
-  #segmentfault: "#"
-  #bilibili: "#"
-  #acfun: "#"
-  #mail: "mailto:zhousiwei0911@qq.com"
-  #facebook: "#"
-  #google: "#"
-  #twitter: "#"
-  #linkedin: "#"
+  - github: "#"
+  - github: "#" # (支持设置多个)
+  - gitee: "#" # 码云
+  - jianshu: "#" #简书
+  # - cnblog: "#"
+  # - blog: "#"
+  # - csdn: "#"
+  # - rss: "#"
+  # - zhihu: "#"
+  # - qq: "img/2434387555.jpg"
+  # - weixin: "img/weixin_.png"
+  # - weibo: "#"
+  # - douban: "#"
+  # - segmentfault: "#"
+  # - bilibili: "#"
+  # - acfun: "#"
+  # - mail: "mailto:zhousiwei0911@qq.com"
+  # - facebook: "#"
+  # - google: "#"
+  # - twitter: "#"
+  # - linkedin: "#"
 
 # 悬停预览图片效果
 hover_effect:
@@ -165,7 +169,8 @@ rss: /atom.xml
 # 是否需要修改 root 路径
 # 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
 # 请将您的 url 设为 http://yoursite.com/blog 并把 / 设为 /blog/。
-root: /
+# 新版本已弃用，请在博客根目录文件进行配置
+# root: /
 
 # Content
 
@@ -228,7 +233,7 @@ changyan_conf: false
 # 2、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia-plus的
 disqus: false
 
-# 3、Gitment----基于GitHub的评论系统(关闭请设置gitment_owner为false)
+# 3、Gitment----基于GitHub的评论系统(关闭请设置gitment_owner为false) **已经使用不了了
 # 关于如何集成:https://www.jianshu.com/p/ac7658cc912f
 gitment_owner: false      #你的 GitHub ID
 # 是否使用官方js(false可以提升访问速度，本地修改过一部分的js，官方js可能会出现服务器不稳定，不太建议使用)
@@ -238,7 +243,7 @@ gitment_oauth:
   client_id: ''           #client ID
   client_secret: ''       #client secret
 
-# 4、Giteement----【国内用户建议使用这个，相对比较快】
+# 4、Giteement----【国内用户建议使用这个，相对比较快】 **已经使用不了了
 # 关于如何集成:https://www.jianshu.com/p/f5c4633524c7
 # 基于码云的评论系统(https://gitee.com/zhousiwei/giteement)
 giteement:
@@ -255,6 +260,17 @@ giteement:
     client_id: ''           #client ID
     client_secret: ''       #client secret
 
+#5、集成gitalk评论系统  **推荐使用这个 
+#关于如何集成：https://leftover.cn/2022/04/22/hexo-theme-yilia-plus%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90aplayer%E9%9F%B3%E4%B9%90%E6%8F%92%E4%BB%B6%E5%92%8Cgitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/
+gitalk:
+  client_id: '' #上面得到的client_id
+  client_secret: '' #上面得到的secret
+  repo: 'blog.github.io' #填写你存储评论的仓库名称，一般填写自己的博客仓库名即可
+  owner: 'left0ver' #仓库的所有者,填写你的用户名即可
+  admin: ['left0ver'] #仓库的管理员，没有特殊情况填你一个你自己的用户名即可
+  id: location.href  #issue的id,具有唯一性，默认是location.href，长度小于50，下面的步骤中后面会对id做一些修改
+  distraction_free_mode: true #类似Facebook评论框的全屏遮罩效果
+  labels: ['Comment'] #issue的标签，默认['Gitalk']
 # 访问量统计功能(不蒜子)
 busuanzi:
   enable: true
@@ -263,13 +279,36 @@ busuanzi:
 
 # 网易云音乐插件
 music:
-  enable: false
+  cloudMusic:
+    enable: false
   # 播放器尺寸类型(1：长尺寸、2：短尺寸)
-  type: 2
-  #id: 1332647902  # 网易云分享的音乐ID(更换音乐请更改此配置项)
-  autoPlay: true  # 是否开启自动播放
+    type: 2
+  #id: 1334445174  # 网易云分享的音乐ID(更换音乐请更改此配置项)
+    autoPlay: true  # 是否开启自动播放
   # 提示文本(关闭请设置为false)
-  text: '这似乎是首纯音乐，请尽情的欣赏它吧！'
+    text: '这似乎是首纯音乐，请尽情的欣赏它吧！'
+
+ # aplayer 音乐插件，https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md
+  # {% meting "60198" "netease" "playlist" "autoplay" "mutex:false" "listmaxheight:340px" "preload:none" "theme:#ad7a86" ... %}
+  # 如需使用此插件,首先在项目根目录安装hexo-tag-aplayer，`npm install --save hexo-tag-aplayer`
+  # 再在项目的_config.yml文件的末尾中添加下面两行
+  # aplayer:
+  #   meting: true
+  aplayer:                # aplayer 音乐插件
+    enable: true          # 使用aplayer
+    id: '8444951237'      # 必须值 歌曲 id / 播放列表 id / 相册 id / 搜索关键字
+    server: 'tencent'	  # 必须值 音乐平台: netease, tencent, kugou, xiami, baidu
+    type: 'playlist'	  # 必须值 song, playlist, album, search, artist
+    fixed: true	          # false 开启固定模式 true 开启吸底模式
+    loop: none	          # 列表循环模式：all, one,none
+    order: random	      # 列表播放模式： list, random
+    volume: 0.4	          # 播放器音量
+    listfolded: true	  # 指定音乐播放列表是否折叠
+    autoplay: false	      # 自动播放，移动端浏览器暂时不支持此功能
+    mutex: true	          # 该选项开启时，如果同页面有其他 aplayer 播放，该播放器会暂停
+    listmaxheight: 400px  # 播放列表的最大长度
+    preload: none	      # 音乐文件预载入模式，可选项： none, metadata, auto
+    theme: '#C7A3AD'	  # 播放器风格色彩设置
 
 # 页面点击小红心
 clickLove:
@@ -292,6 +331,8 @@ baidu_push: false
 # 版权声明
 # 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明
 copyright_type: 2
+# 版权声明自定义文本(关闭请设置为false)
+copyright_text:
 
 # 网站成立年份(默认为 2018，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)
 since: 2018
@@ -372,7 +413,7 @@ style:
 # slider的设置
 slider:
   # 是否默认展开tags板块
-  showTags: false
+  showTags: true
 
 # 智能菜单
 # 如不需要，将该对应项置为false

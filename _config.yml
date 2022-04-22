@@ -133,7 +133,7 @@ giteement:
     client_id: ''           #client ID
     client_secret: ''       #client secret
 
-#5、集成gitalk评论系统  **推荐使用这个
+#5、集成gitalk评论系统  **推荐使用这个 关于如何集成：https://leftover.cn/2022/04/22/hexo-theme-yilia-plus%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90aplayer%E9%9F%B3%E4%B9%90%E6%8F%92%E4%BB%B6%E5%92%8Cgitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/
 gitalk:
   client_id: '' #上面得到的client_id
   client_secret: '' #上面得到的secret
@@ -160,6 +160,12 @@ music:
   # 提示文本(关闭请设置为false)
     text: '这似乎是首纯音乐，请尽情的欣赏它吧！'
 
+ # aplayer 音乐插件，https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md
+  # {% meting "60198" "netease" "playlist" "autoplay" "mutex:false" "listmaxheight:340px" "preload:none" "theme:#ad7a86" ... %}
+  # 如需使用此插件,首先在项目根目录安装hexo-tag-aplayer，`npm install --save hexo-tag-aplayer`
+  # 再在项目的_config.yml文件的末尾中添加下面两行
+  # aplayer:
+  #   meting: true
   aplayer:                # aplayer 音乐插件
     enable: true          # 使用aplayer
     id: '8444951237'      # 必须值 歌曲 id / 播放列表 id / 相册 id / 搜索关键字
